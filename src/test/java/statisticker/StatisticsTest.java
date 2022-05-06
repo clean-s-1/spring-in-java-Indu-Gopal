@@ -1,16 +1,19 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+package statisticker;
 
-import java.util.ArrayList;
+import static org.junit.Assert.*;
+//import jdk.nashorn.internal.AssertsEnabled;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-public class StatisticsTest {
-	@Test
-	public void reportsAverageMinMaxx() {
+public class StatisticsTest 
+{
+    @Test
+    public void reportsAverageMinMaxx()
+    {
 		Float[] numbers = { 1.5f, 8.9f, 3.2f, 4.5f };
 		List<Float> numberList = Arrays.asList(numbers);
 
@@ -20,23 +23,24 @@ public class StatisticsTest {
 		assertEquals(s.average, 4.525f, epsilon);
 		assertEquals(s.min, 1.5f, epsilon);
 		assertEquals(s.max, 8.9f, epsilon);
-	}
-
-	@Test
-	public void reportsNaNForEmptyInput() {
+    }
+    @Test
+    public void reportsNaNForEmptyInput()
+    {
 		List<Float> emptyList = new ArrayList<>();
 		// All fields of computedStats (average, max, min) must be
 		// Float.NaN (not-a-number), as described in
 		// https://www.geeksforgeeks.org/nan-not-number-java/
 		// Design the asserts here and implement accordingly.
 		Statistics.Stats s = Statistics.getStatistics(emptyList);
-		Assert.assertTrue(s.average.isNaN());
-		Assert.assertTrue(s.min.isNaN());
-		Assert.assertTrue(s.max.isNaN());
-	}
+        assertEquals(s.average, Float.NaN, 0.0);
+        assertEquals(s.min, Float.NaN, 0.0);
+        assertEquals(s.max, Float.NaN, 0.0);
 
-	@Test
-	public void reportsAlertsIfMaxIsMoreThanThreshold() {
+    }
+    @Test
+    public void reportsAlertsIfMaxIsMoreThanThreshold()
+    {
 		EmailAlert emailAlerter = new EmailAlert();
 		LEDAlert ledAlerter = new LEDAlert();
 		IAlerter alerters[] = { emailAlerter, ledAlerter };
@@ -49,5 +53,5 @@ public class StatisticsTest {
 
 		assertTrue(emailAlerter.emailSent);
 		assertTrue(ledAlerter.ledGlows);
-	}
+    }
 }
