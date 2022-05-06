@@ -1,3 +1,4 @@
+package statisticker;
 
 public class LEDAlert implements IAlerter {
 
